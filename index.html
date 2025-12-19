@@ -490,13 +490,23 @@
 
                 // --- Hand Logic  ---
                 if (results.multiHandLandmarks.length === 2) {
-                    const h1 = results.multiHandLandmarks[0]; const h2 = results.multiHandLandmarks[1];
-                    const distIndex = Math.hypot(h1[8].x - h2[8].x, h1[8].y - h2[8].y);
-                    const distThumb = Math.hypot(h1[4].x - h2[4].x, h1[4].y - h2[4].y);
-                    if (distIndex < 0.08 && distThumb < 0.08) {
-                        state = 'HEART'; return;
-                    }
-                }
+    const h1 = results.multiHandLandmarks[0];
+    const h2 = results.multiHandLandmarks[1];
+
+    const indexDist = Math.hypot(h1[8].x - h2[8].x, h1[8].y - h2[8].y);
+    const thumbDist = Math.hypot(h1[4].x - h2[4].x, h1[4].y - h2[4].y);
+
+    // vị trí trung bình của 2 tay
+    const avgY = (h1[0].y + h2[0].y) / 2;
+
+    // điều kiện: tay phải ở NỬA TRÊN màn hình
+    const handsAreUp = avgY < 0.55;
+
+    if (indexDist < 0.07 && thumbDist < 0.07 && handsAreUp) {
+        state = 'HEART';
+        return;
+    }
+}
 
                 if(results.multiHandLandmarks.length > 0) {
                     const lm = results.multiHandLandmarks[0];

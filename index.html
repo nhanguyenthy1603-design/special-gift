@@ -448,7 +448,7 @@
                     const y = Math.sin(time + i) * 3; 
                     mesh.position.lerp(new THREE.Vector3(x, y, z), 0.1);
                     mesh.lookAt(camera.position);
-                    if (z > maxZ - 3) { maxZ = z; bestIdx = i; }
+                    if (z > maxZ - 2) { maxZ = z; bestIdx = i; }
                     if (z > 5) { 
                         const ds = 1.0 + (z/CONFIG.photoOrbitRadius)*0.8; 
                         mesh.scale.lerp(new THREE.Vector3(ds, ds, ds), 0.1);
@@ -493,8 +493,7 @@
                     const h1 = results.multiHandLandmarks[0]; const h2 = results.multiHandLandmarks[1];
                     const distIndex = Math.hypot(h1[8].x - h2[8].x, h1[8].y - h2[8].y);
                     const distThumb = Math.hypot(h1[4].x - h2[4].x, h1[4].y - h2[4].y);
-                    if (distIndex < 0.08 && distThumb < 0.08)
-    
+                    if (distIndex < 0.08 && distThumb < 0.08) {
                         state = 'HEART'; return;
                     }
                 }

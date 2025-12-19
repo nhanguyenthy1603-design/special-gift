@@ -448,7 +448,7 @@
                     const y = Math.sin(time + i) * 3; 
                     mesh.position.lerp(new THREE.Vector3(x, y, z), 0.1);
                     mesh.lookAt(camera.position);
-                    if (z > maxZ) { maxZ = z; bestIdx = i; }
+                    if (z > maxZ - 2) { maxZ = z; bestIdx = i; }
                     if (z > 5) { 
                         const ds = 1.0 + (z/CONFIG.photoOrbitRadius)*0.8; 
                         mesh.scale.lerp(new THREE.Vector3(ds, ds, ds), 0.1);
